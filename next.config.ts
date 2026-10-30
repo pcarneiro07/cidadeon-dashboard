@@ -1,3 +1,6 @@
 import type { NextConfig } from 'next';
-const nextConfig: NextConfig = { reactStrictMode: true, output: 'standalone' };
+
+// Deploy nativo na Vercel; sem standalone, Docker ou Snowflake.
+const nextConfig: NextConfig = { reactStrictMode: true };
+
 export default nextConfig;
