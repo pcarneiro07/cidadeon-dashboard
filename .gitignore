@@ -1,0 +1,31 @@
+# Dependências e compilação
+node_modules/
+.next/
+out/
+build/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Configuração e credenciais
+.env
+.env.*
+!.env.example
+**/secrets/
+*oauth*.json
+*token*.json
+*credentials*.json
+*service-account*.json
+*.pem
+*.p12
+*.key
+.snowflake/
+
+# Arquivos locais
+.venv/
+venv/
+__pycache__/
+*.log
+*.zip
+.DS_Store
+Thumbs.db

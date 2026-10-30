@@ -1,0 +1,24 @@
+-- Execute no Snowsight com uma role autorizada a criar Network Rules e Integrations.
+-- Nenhum recurso do ACIDADEON_INTELLIGENCE será modificado.
+USE DATABASE YOUTUBE_EPTV;
+USE SCHEMA DEV;
+
+CREATE NETWORK RULE IF NOT EXISTS CIDADEON_GOOGLE_EGRESS
+  MODE = EGRESS
+  TYPE = HOST_PORT
+  VALUE_LIST = (
+    'analyticsdata.googleapis.com',
+    'www.googleapis.com',
+    'oauth2.googleapis.com'
+  );
+
+-- Requer CREATE INTEGRATION na conta. Crie somente depois dos dois Secrets OAuth2.
+CREATE EXTERNAL ACCESS INTEGRATION CIDADEON_GOOGLE_EAI
+  ALLOWED_NETWORK_RULES = (YOUTUBE_EPTV.DEV.CIDADEON_GOOGLE_EGRESS)
+  ALLOWED_AUTHENTICATION_SECRETS = (
+    YOUTUBE_EPTV.DEV.CIDADEON_GA4_OAUTH,
+    YOUTUBE_EPTV.DEV.CIDADEON_GSC_OAUTH
+  )
+  ENABLED = TRUE;
+
+GRANT USAGE ON INTEGRATION CIDADEON_GOOGLE_EAI TO ROLE RL_YOUTUBE_DEV;
